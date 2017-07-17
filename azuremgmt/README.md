@@ -1,0 +1,1 @@
+# Demo script for Azure mgmt session
