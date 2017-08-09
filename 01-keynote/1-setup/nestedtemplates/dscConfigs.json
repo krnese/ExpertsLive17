@@ -166,9 +166,10 @@
                         "description": "[variables('assets').dsc.omsConfig.description]",
                         "state": "Published",
                         "overwrite": "true",
-                        "Source": {
+                        "source": {
                             "type": "uri",
-                            "Value": "[variables('assets').dsc.omsConfig.uri]"
+                            "value": "[variables('assets').dsc.omsConfig.uri]",
+                            "version": "1.0.0.0"
                         }
                     }
                 },
@@ -204,9 +205,10 @@
                         "description": "[variables('assets').dsc.omsAsrComplete.description]",
                         "state": "Published",
                         "overwrite": "true",
-                        "Source": {
+                        "source": {
                             "type": "uri",
-                            "Value": "[variables('assets').dsc.omsAsrComplete.uri]"
+                            "value": "[variables('assets').dsc.omsAsrComplete.uri]",
+                            "version": "1.0.0.0"
                         }
                     }
                 },
@@ -242,7 +244,7 @@
                         "description": "[variables('assets').dsc.omsService.description]",
                         "state": "Published",
                         "overwrite": "true",
-                        "Source": {
+                        "source": {
                             "type": "uri",
                             "Value": "[variables('assets').dsc.omsService.uri]"
                         }
