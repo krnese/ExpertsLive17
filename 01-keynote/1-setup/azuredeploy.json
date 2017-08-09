@@ -162,6 +162,11 @@
             "asrRunbooks": "[uri(deployment().properties.templateLink.uri, 'nestedtemplates/asrRunbooks.json')]",
             "dscConfigs": "[uri(deployment().properties.templateLink.uri, 'nestedtemplates/dscConfigs.json')]",
             "mgmtDashboards": "[uri(deployment().properties.templateLink.uri, 'nestedtemplates/mgmtDashboards.json')]"
+        },
+        "resourceNames": {
+            "omsWorkspace": "[concat(parameters('omsWorkspaceName'), uniquestring(resourceGroup().name, '-oms'))]",
+            "azureAutomation": "[concat(parameters('omsAutomationAccountName'), uniquestring(resourceGroup().name, '-auto'))]",
+            "azureRecoveryServices": "[concat(parameters('omsRecoveryVaultName'), uniquestring(resourceGroup().name, '-recovery'))]"
         }
     },
     "resources": [
@@ -178,7 +183,7 @@
                 },
                 "parameters": {
                     "omsWorkspaceName": {
-                        "value": "[parameters('omsWorkspaceName')]"
+                        "value": "[variables('resourceNames').omsWorkspace]"
                     },
                     "omsWorkspaceRegion": {
                         "value": "[parameters('omsWorkspaceRegion')]"
@@ -199,7 +204,7 @@
                 },
                 "parameters": {
                     "omsRecoveryVaultName": {
-                        "value": "[parameters('omsRecoveryVaultName')]"
+                        "value": "[variables('resourceNames').azureRecoveryServices]"
                     },
                     "omsRecoveryVaultRegion": {
                         "value": "[parameters('omsRecoveryVaultRegion')]"
@@ -223,16 +228,16 @@
                 },
                 "parameters": {
                     "omsAutomationAccountName": {
-                        "value": "[parameters('omsAutomationAccountName')]"
+                        "value": "[variables('resourceNames').azureAutomation]"
                     },
                     "omsAutomationRegion": {
                         "value": "[parameters('omsAutomationRegion')]"
                     },
                     "omsRecoveryVaultName": {
-                        "value": "[parameters('omsRecoveryVaultName')]"
+                        "value": "[variables('resourceNames').azureRecoveryServices]"
                     },
                     "omsWorkspaceName": {
-                        "value": "[parameters('omsWorkspaceName')]"
+                        "value": "[variables('resourceNames').omsWorkspace]"
                     },
                     "azureAdmin": {
                         "value": "[parameters('azureAdmin')]"
@@ -258,7 +263,7 @@
             },
             "parameters": {
               "automationAccountName": {
-                "value": "[parameters('omsAutomationAccountName')]"
+                "value": "[variables('resourceNames').azureAutomation]"
               },
               "automationRegion": {
                 "value": "[parameters('omsAutomationRegion')]"
@@ -281,13 +286,13 @@
             },
             "parameters": {
               "omsAutomationAccountName": {
-                "value": "[parameters('omsAutomationAccountName')]"
+                "value": "[variables('resourceNames').azureAutomation]"
               },
               "omsAutomationRegion": {
                 "value": "[parameters('omsAutomationRegion')]"
               },
               "omsWorkspaceName": {
-                "value": "[parameters('omsWorkspaceName')]"
+                "value": "[variables('resourceNames').omsWorkspace]"
               },
               "DSCJobGuid": {
                 "value": "[parameters('DSCJobGuid')]"
@@ -336,7 +341,7 @@
                         "value": "[parameters('pwd')]"
                     },
                     "omsRecoveryVaultName": {
-                        "value": "[parameters('omsRecoveryVaultName')]"
+                        "value": "[variables('resourceNames').azureRecoveryServices]"
                     },
                     "omsRecoveryVaultRegion": {
                         "value": "[parameters('omsRecoveryVaultRegion')]"
@@ -345,7 +350,7 @@
                         "value": "[resourceGroup().name]"
                     },
                     "omsWorkspaceName": {
-                        "value": "[parameters('omsWorkspaceName')]"
+                        "value": "[variables('resourceNames').omsWorkspace]"
                     }
                 }
             }
@@ -367,13 +372,13 @@
             },
             "parameters": {
               "omsWorkspaceName": {
-                "value": "[parameters('omsWorkspaceName')]"
+                "value": "[variables('resourceNames').omsWorkspace]"
               },
               "omsRecoveryVaultName": {
-                "value": "[parameters('omsRecoveryVaultName')]"
+                "value": "[variables('resourceNames').azureRecoveryServices]"
               },
               "omsAutomationAccountName": {
-                "value": "[parameters('omsAutomationAccountName')]"
+                "value": "[variables('resourceNames').azureAutomation]"
               },
               "vmResourceGroup": {
                 "value": "[parameters('vmResourceGroup')]"
