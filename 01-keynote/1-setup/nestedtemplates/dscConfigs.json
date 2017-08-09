@@ -61,6 +61,11 @@
                     "description": "DSC configuration for installing the OMS and Azure agent for protected machines for ASR",
                     "uri": "[uri(deployment().properties.templateLink.uri, 'scripts/omsasr.ps1')]"
                 }
+            },
+            "guids": {
+                "guid1": "[guid(uniqueString(deployment().name, 'dsc1'))]",
+                "guid2": "[guid(uniqueString(deployment().name, 'dsc2'))]",
+                "guid3": "[guid(uniqueString(deployment().name, 'dsc3'))]"
             }
         }
     },
@@ -156,7 +161,7 @@
                     }
                 },
                 {
-                    "name": "[guid('dsc1')]",
+                    "name": "[variables('assets').guids.guid1]",
                     "type": "Compilationjobs",
                     "apiVersion": "2015-10-31",
                     "tags": {},
@@ -195,7 +200,7 @@
                     }
                 },
                 {
-                    "name": "[guid('dsc2')]",
+                    "name": "[variables('assets').guids.guid2]",
                     "type": "Compilationjobs",
                     "apiVersion": "2015-10-31",
                     "tags": {},
@@ -233,7 +238,7 @@
                     }
                 },
                 {
-                    "name": "[guid('dsc3')]",
+                    "name": "[variables('assets').guids.guid3]",
                     "type": "Compilationjobs",
                     "apiVersion": "2015-10-31",
                     "tags": {},
