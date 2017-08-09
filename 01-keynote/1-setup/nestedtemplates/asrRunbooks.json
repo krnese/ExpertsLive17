@@ -28,7 +28,7 @@
             "runbooks": [
                 {
                     "name": "ASR-AddPublicIp",
-                    "url": "[uri(deployment().properties.templateLink.uri, '/scripts/ASR-AddPublicIp.ps1')]",
+                    "url": "[uri(deployment().properties.templateLink.uri, 'scripts/ASR-AddPublicIp.ps1')]",
                     "version": "1.0.0.0",
                     "type": "PowerShell",
                     "description": "ASR Runbook to enable public IP on every VM in a Recovery Plan"
@@ -63,7 +63,7 @@
                 },
                 {
                     "name": "ASR-DNS-UpdateIP",
-                    "url": "[uri(deployment().properties.templateLink.uri, '/scripts/ASR-DNS-UpdateIP.ps1')]",
+                    "url": "[uri(deployment().properties.templateLink.uri, 'scripts/ASR-DNS-UpdateIP.ps1')]",
                     "version": "1.0.0.0",
                     "type": "PowerShellWorkflow",
                     "description": "ASR Runbook to update DNS for VMs within the recovery plan"
