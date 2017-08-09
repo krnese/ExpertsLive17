@@ -21,24 +21,6 @@
             "metadata": {
                 "description": "Specify the name of your existing OMS Automation account to store the configuration"
             }
-        },
-        "DSCJobGuid": {
-            "type": "string",
-            "metadata": {
-                "description": "Type the guid for the DSC job"
-            }
-        },
-        "DSCJobGuid2": {
-            "type": "string",
-            "metadata": {
-                "description": "Type the guid for the DSC job 2"
-            }
-        },
-        "DSCJobGuid3": {
-            "type": "string",
-            "metadata": {
-                "description": "Type the guid for the DSC job3"
-            }
         }
     },
     "variables": {
@@ -174,7 +156,7 @@
                     }
                 },
                 {
-                    "name": "[parameters('DSCJobGuid')]",
+                    "name": "[guid('dsc1')]",
                     "type": "Compilationjobs",
                     "apiVersion": "2015-10-31",
                     "tags": {},
@@ -213,7 +195,7 @@
                     }
                 },
                 {
-                    "name": "[parameters('DSCJobGuid2')]",
+                    "name": "[guid('dsc2')]",
                     "type": "Compilationjobs",
                     "apiVersion": "2015-10-31",
                     "tags": {},
@@ -251,7 +233,7 @@
                     }
                 },
                 {
-                    "name": "[parameters('DSCJobGuid3')]",
+                    "name": "[guid('dsc3')]",
                     "type": "Compilationjobs",
                     "apiVersion": "2015-10-31",
                     "tags": {},

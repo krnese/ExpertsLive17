@@ -142,15 +142,6 @@
         },
         "vmResourceGroup": {
             "type": "string"
-        },
-        "DSCJobGuid": {
-          "type": "string"
-        },
-        "DSCJobGuid2": {
-          "type": "string"
-        },
-        "DSCJobGuid3": {
-          "type": "string"
         }
     },
     "variables": {
@@ -293,15 +284,6 @@
               },
               "omsWorkspaceName": {
                 "value": "[variables('resourceNames').omsWorkspace]"
-              },
-              "DSCJobGuid": {
-                "value": "[parameters('DSCJobGuid')]"
-              },
-              "DSCJobGuid2": {
-                "value": "[parameters('DSCJobGuid2')]"
-              },
-              "DSCJobGuid3": {
-                "value": "[parameters('DSCJobGuid3')]"
               }
             }
           }          
