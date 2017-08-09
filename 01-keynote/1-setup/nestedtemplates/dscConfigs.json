@@ -67,17 +67,17 @@
                 "omsConfig": {
                     "name": "OMS",
                     "description": "DSC configuration for installing and configuring OMS agent",
-                    "uri": "https://raw.githubusercontent.com/krnese/AzureDeploy/master/OMS/MSOMS/OMSDemo/scripts/oms.ps1"
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'scripts/oms.ps1')]"
                 },
                 "omsService": {
                     "name": "OMSSERVICE",
                     "description": "DSC configuration for keeping the OMS agent in a running state",
-                    "uri": "https://raw.githubusercontent.com/krnese/AzureDeploy/master/OMS/MSOMS/OMSDemo/scripts/omsservice.ps1"
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'scripts/omsservice.ps1')]"
                 },
                 "omsAsrComplete": {
                     "name": "OMSASR",
                     "description": "DSC configuration for installing the OMS and Azure agent for protected machines for ASR",
-                    "uri": "https://raw.githubusercontent.com/krnese/AzureDeploy/master/OMS/MSOMS/OMSDemo/scripts/omsasr.ps1"
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'scripts/omsasr.ps1')]"
                 }
             }
         }
