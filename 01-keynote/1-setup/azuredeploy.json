@@ -116,6 +116,16 @@
                 "description": "Select the OS type to deploy"
             }
         },
+        "production": {
+            "type": "string",
+            "allowedValues": [
+                "Yes",
+                "No"
+            ],
+            "metadata": {
+                "description": "Specify whether the VMs should be for production or not"
+            }
+        },
         "vmSize": {
             "type": "string",
             "defaultValue": "Standard_D1",
@@ -312,6 +322,9 @@
                     },
                     "platform": {
                         "value": "[parameters('platform')]"
+                    },
+                    "production": {
+                        "value": "[parameters('production')]"
                     },
                     "vmSize": {
                         "value": "[parameters('vmSize')]"
