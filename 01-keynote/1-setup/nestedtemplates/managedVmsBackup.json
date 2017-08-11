@@ -38,8 +38,7 @@
         "backupPolicy": "DefaultPolicy",
         "v2VmType": "Microsoft.Compute/virtualMachines",
         "v2VmContainer": "iaasvmcontainer;iaasvmcontainerv2;",
-        "v2Vm": "vm;iaasvmcontainerv2;",
-        "v2VmTypeLinux": "Microsoft.ClassicCompute/virtualMachines"              
+        "v2Vm": "vm;iaasvmcontainerv2;"            
     },
     "resources": [
         {
@@ -69,7 +68,7 @@
                 "count": "[parameters('instanceCount')]"
             },
             "properties": {
-                "protectedItemType": "[variables('v2VmTypeLinux')]",
+                "protectedItemType": "[variables('v2VmType')]",
                 "policyId": "[resourceId('Microsoft.RecoveryServices/vaults/backupPolicies',parameters('omsRecoveryVaultName'),variables('backupPolicy'))]",
                 "sourceResourceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('vmRgName'), '/providers/Microsoft.Compute/virtualMachines/', parameters('vmNameSuffix'), 'VML', copyIndex())]"
             }
