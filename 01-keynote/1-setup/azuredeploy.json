@@ -78,18 +78,6 @@
                 "description": "Specify the region for your Automation account"
             }
         },
-        "azureAdmin": {
-            "type": "string",
-            "metadata": {
-                "description": "Enter your service admin user"
-            }
-        },
-        "azureAdminPwd": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Enter the pwd for the service admin user. The pwd is enrypted during runtime and in the Automation assets"
-            }
-        },
         "instanceCount": {
             "type": "int",
             "defaultValue": 2,
@@ -229,13 +217,7 @@
                     },
                     "omsWorkspaceName": {
                         "value": "[variables('resourceNames').omsWorkspace]"
-                    },
-                    "azureAdmin": {
-                        "value": "[parameters('azureAdmin')]"
-                    },
-                    "azureAdminPwd": {
-                        "value": "[parameters('azureAdminPwd')]"
-                    }
+                    }          
                 }
             }
         },
