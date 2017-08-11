@@ -72,7 +72,7 @@
         }
     },
     "variables": {
-        "storageAccountName": "[toLower(concat('st', uniquestring(resourceGroup().name)))]",
+        "storageAccountName": "[toLower(concat('st', uniquestring(resourceGroup().id)))]",
         "vNetName": "managedVnet",
         "vNetAddressPrefix": "192.168.0.0/16",
         "subnetName": "subnet01",
