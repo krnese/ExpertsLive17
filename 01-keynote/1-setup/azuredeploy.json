@@ -88,7 +88,7 @@
         },
         "vmNameSuffix": {
             "type": "string",
-            "defaultValue": "VM",
+            "defaultValue": "az1demo",
             "metadata": {
                 "description": "Assing a suffix for the VMs you will create"
             }
