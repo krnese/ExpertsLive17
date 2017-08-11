@@ -52,16 +52,6 @@
         "pwd": {
             "type": "securestring"
         },
-        "production": {
-            "type": "string",
-            "allowedValues": [
-                "Yes",
-                "No"
-            ],
-            "metadata": {
-                "description": "Select whether the VMs should be for prod or not"
-            }
-        },
         "omsResourceGroup": {
             "type": "string",
             "metadata": {
@@ -106,9 +96,7 @@
             "imageOffer": "UbuntuServer",
             "imageSku": "12.04.5-LTS",
             "imagepublisher": "Canonical"
-        },
-        "availabilitySetName": "vmAvailabilitySet",
-        "availabilitySetResourceId": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
+        }
     },
     "resources": [
         {
@@ -121,18 +109,7 @@
             },
             "kind": "Storage",
             "properties": {}
-        },
-        {
-            "condition": "[equals(parameters('production'),'Yes')]",
-            "type": "Microsoft.Compute/availabilitySets",
-            "name": "[variables('availabilitySetName')]",
-            "apiVersion": "2015-06-15",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "platformFaultDomainCount": 2,
-                "platformUpdateDomainCount": 5
-            }
-        },        
+        },       
         {
             "apiVersion": "2017-04-01",
             "type": "Microsoft.Network/publicIPAddresses",
@@ -215,7 +192,6 @@
                 "[concat('Microsoft.Network/networkinterfaces/', parameters('vmNameSuffix'), 'nic', copyIndex())]"
             ],
             "properties": {
-                "availabilitySet": "[if(equals(parameters('production'), 'Yes'), variables('availabilitySetresourceId'), json('null'))]",
                 "hardwareprofile": {
                     "vmsize": "[parameters('vmSize')]"
                 },
@@ -291,7 +267,6 @@
                 "[concat('Microsoft.Network/networkinterfaces/', parameters('vmNameSuffix'), 'nic', copyIndex())]"
             ],
             "properties": {
-                "availabilitySet": "[if(equals(parameters('production'), 'Yes'), variables('availabilitySetresourceId'), json('null'))]",
                 "hardwareprofile": {
                     "vmsize": "[parameters('vmSize')]"
                 },
