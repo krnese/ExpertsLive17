@@ -25,6 +25,12 @@
             "metadata": {
                 "description": "Location of the Backup Vault"
             }
+        },
+        "platform": {
+            "type": "string",
+            "metadata": {
+                "description": "Specify OS platform"
+            }
         }
     },
     "variables": {
@@ -32,10 +38,12 @@
         "backupPolicy": "DefaultPolicy",
         "v2VmType": "Microsoft.Compute/virtualMachines",
         "v2VmContainer": "iaasvmcontainer;iaasvmcontainerv2;",
-        "v2Vm": "vm;iaasvmcontainerv2;"
+        "v2Vm": "vm;iaasvmcontainerv2;",
+        "v2VmTypeLinux": "Microsoft.ClassicCompute/virtualMachines"              
     },
     "resources": [
         {
+            "condition": "[equals(parameters('platform'), 'Windows')]",
             "name": "[concat(parameters('omsRecoveryVaultName'), '/', variables('backupFabric'), '/', variables('v2VmContainer'), concat(parameters('vmRgName'),';',parameters('vmNameSuffix'), 'VM',copyIndex()), '/', variables('v2Vm'), concat(parameters('vmRgName'),';',parameters('vmNameSuffix'),'VM',copyIndex()))]",
             "apiVersion": "2016-12-01",
             "location": "[parameters('omsRecoveryVaultRegion')]",
@@ -49,6 +57,22 @@
                 "policyId": "[resourceId('Microsoft.RecoveryServices/vaults/backupPolicies',parameters('omsRecoveryVaultName'),variables('backupPolicy'))]",
                 "sourceResourceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('vmRgName'), '/providers/Microsoft.Compute/virtualMachines/', parameters('vmNameSuffix'), 'VM', copyIndex())]"
             }
-        }
+        },
+        {
+            "condition": "[equals(parameters('platform'), 'Linux')]",
+            "name": "[concat(parameters('omsRecoveryVaultName'), '/', variables('backupFabric'), '/', variables('v2VmContainer'), concat(parameters('vmRgName'),';',parameters('vmNameSuffix'), 'VML',copyIndex()), '/', variables('v2Vm'), concat(parameters('vmRgName'),';',parameters('vmNameSuffix'),'VML',copyIndex()))]",
+            "apiVersion": "2016-12-01",
+            "location": "[parameters('omsRecoveryVaultRegion')]",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
+            "copy": {
+                "name": "iaasBackupCopy",
+                "count": "[parameters('instanceCount')]"
+            },
+            "properties": {
+                "protectedItemType": "[variables('v2VmTypeLinux')]",
+                "policyId": "[resourceId('Microsoft.RecoveryServices/vaults/backupPolicies',parameters('omsRecoveryVaultName'),variables('backupPolicy'))]",
+                "sourceResourceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('vmRgName'), '/providers/Microsoft.Compute/virtualMachines/', parameters('vmNameSuffix'), 'VML', copyIndex())]"
+            }
+        }        
     ]
 }

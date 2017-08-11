@@ -357,6 +357,9 @@
                     },
                     "omsRecoveryVaultRegion": {
                         "value": "[parameters('omsRecoveryVaultRegion')]"
+                    },
+                    "platform": {
+                        "value": "[parameters('platform')]"
                     }
                 }
             }
@@ -391,6 +394,9 @@
                     },
                     "omsRecoveryVaultRegion": {
                         "value": "[parameters('omsRecoveryVaultRegion')]"
+                    },
+                    "platform": {
+                        "value": "[parameters('platform')]"
                     }
                 }
             }

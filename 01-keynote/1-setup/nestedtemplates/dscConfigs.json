@@ -64,8 +64,8 @@
             },
             "guids": {
                 "guid1": "[guid(uniqueString(deployment().name, 'dsc01'))]",
-                "guid2": "[guid(uniqueString(deployment().name, 'dsc02'))]",
-                "guid3": "[guid(uniqueString(deployment().name, 'dsc03'))]"
+                "guid2": "[guid(uniqueString(subscription().id, 'dsc02'))]",
+                "guid3": "[guid(uniqueString(resourceGroup().id, 'dsc03'))]"
             }
         }
     },
