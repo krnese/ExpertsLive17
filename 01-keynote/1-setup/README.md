@@ -1,58 +1,54 @@
-# Nested Resource Manager templates
+# Azure Management Services
 
-This sample is built specifically as part of the **Azure Resource Manager - Demystified** hackathon.
+>Note: The purpose of these templates, is to give you a kick-start, instantiating all of the Azure mgmt services in Azure.
+The mgmt. services will be fully integrated, and you will have VM workloads which will be fully managed as part of the deployment.
+**Please note that this sample is for demo purposes only**
 
-### How to deploy
+## How to deploy
+These templates should be deployed using PowerShell, as you need to create two resource groups prior to submitting the deployment. 
+The guidance below shows a sample script, where you only have to provide your unique values to the variables.
 
-The main template will deploy resources into two different resource groups, and you can use the following PoweShell example to deploy:
-	
-	# Create 2 resource groups, for mgmt and workload
-	
-	$MgmtRg = New-AzureRmResourceGroup -Name mymgmtrg -Location westeurope -Verbose
-	$WorkloadRg = New-AzureRmResourceGroup -Name myworkloadrg -Location westeurope -Verbose
-	
-	# Define parameters for template deployment - remember to change the values!
-	
-	$OMSWorkspaceName = 'myworkspace50'
-	$OMSWorkspaceRegion = 'West Europe'
-	$OMSRecoveryVaultName = 'myrecoveryvault50'
-	$OMSRecoveryVaultRegion = 'West Europe'
-	$OMSAutomationName = 'myautomation50'
-	$OMSAutomationRegion = 'West Europe'
-	$azureAdmin = 'yourUser@domain.com'
-	$Platform = 'Windows'
-	$userName = 'azureadmin'
-	$vmNameSuffix = 'myvmwl'
-	$instanceCount = '2'
-	$DSCJobGuid = (New-Guid)
-	$DSCJobGuid2 = (New-Guid)
-	$DSCJobGuid3 = (New-Guid)
-	
-	# Deploy template
-	
-	New-AzureRmResourceGroupDeployment -Name myDemo `
-	                                   -ResourceGroupName $MgmtRg.ResourceGroupName `
-	                                   -TemplateUri 'https://raw.githubusercontent.com/krnese/ExpertsLive17/master/01-keynote/1-setup/azuredeploy.json' `
-	                                   -vmResourceGroup $WorkloadRg.ResourceGroupName `
-	                                   -omsRecoveryVaultName $OMSRecoveryVaultName `
-	                                   -omsRecoveryVaultRegion $OMSRecoveryVaultRegion `
-	                                   -omsWorkspaceName $OMSWorkspaceName `
-	                                   -omsWorkspaceRegion $OMSWorkspaceRegion `
-	                                   -omsAutomationAccountName $OMSAutomationName `
-	                                   -omsAutomationRegion $OMSAutomationRegion `
-	                                   -vmNameSuffix $vmNameSuffix `
-	                                   -userName $userName `
-	                                   -platform $platform `
-	                                   -instanceCount $instanceCount `
-	                                   -azureAdmin $azureAdmin `
-	                                   -DSCJobGuid $DSCJobGuid `
-	                                   -DSCJobGuid2 $DSCJobGuid2 `
-	                                   -DSCJobGuid3 $DSCJobGuid3 `
-	                                   -verbose
+```powershell
 
+# Create 2 resource groups, for mgmt and workload
+$MgmtRgName = '' # Specify name for the resource group containing the management services
+$WorkloadRgName = '' # Specify the name for the resource group containing the virtual machine(s)
 
-### Post Deployment
+$MgmtRg = New-AzureRmResourceGroup -Name $MgmtRgName -Location westeurope -Verbose
+$WorkloadRg = New-AzureRmResourceGroup -Name $WorkloadRgName -Location westeurope -Verbose
 
+# Define parameters for template deployment - remember to change the values!
+
+$OMSWorkspaceName = '' # Specify the prefix for the OMS Workspace
+$OMSWorkspaceRegion = '' # Select the region for your workspace
+$OMSRecoveryVaultName = '' # Specify the prefix for the Recovery Vault
+$OMSRecoveryVaultRegion = '' # Select the region for your Recovery Vault
+$OMSAutomationName = '' # Specify the prefix for the Azure Automation account
+$OMSAutomationRegion = '' # Select the region for the Automation account
+$Platform = '' # Select either 'Windows' or 'Linux'
+$userName = '' # username for the VM
+$vmNameSuffix = '' # Specify the suffix for the virtual machine(s) that will be created
+$instanceCount = '' # You can create 1-10 VMs
+$deploymentName = '' # Specify the name of the main ARM template deployment job
+$templateUri = 'https://raw.githubusercontent.com/Azure/azure-quickstart-templates/azmgmt-demo/azuredeploy.json'
+# Deploy template
+
+New-AzureRmResourceGroupDeployment -Name $deploymentName `
+                                   -ResourceGroupName $MgmtRg.ResourceGroupName `
+                                   -TemplateUri $templateUri `
+                                   -vmResourceGroup $WorkloadRg.ResourceGroupName `
+                                   -omsRecoveryVaultName $OMSRecoveryVaultName `
+                                   -omsRecoveryVaultRegion $OMSRecoveryVaultRegion `
+                                   -omsWorkspaceName $OMSWorkspaceName `
+                                   -omsWorkspaceRegion $OMSWorkspaceRegion `
+                                   -omsAutomationAccountName $OMSAutomationName `
+                                   -omsAutomationRegion $OMSAutomationRegion `
+                                   -vmNameSuffix $vmNameSuffix `
+                                   -userName $userName `
+                                   -platform $platform `
+                                   -instanceCount $instanceCount `
+                                   -verbose
+```
 Navigate to [Azure Portal](https://portal.azure.com) and find the newly created dashboard, which will have the following naming convention *AzureMgmt(uniqueString(deployment().name))*:
 
 ![media](./images/dashboard-new.png)
